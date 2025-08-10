@@ -14,6 +14,6 @@ test('resources created', () => {
   template.resourceCountIs('AWS::Lambda::Function', 2);
 
   template.hasResourceProperties('AWS::S3::Bucket', {
-    BucketName: 'jhon-serverless-video-transcoder-store'
+    BucketName: 'jhon-serverless-video-transcoder-store-us-east-1'
   });
 });
