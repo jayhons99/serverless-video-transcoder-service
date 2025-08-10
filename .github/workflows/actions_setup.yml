@@ -15,8 +15,9 @@ permissions:
 
 jobs:
   ci:
-    name: CI step
+    name: CI
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main'
 
     steps:
       - name: Checkout
