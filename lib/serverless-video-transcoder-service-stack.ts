@@ -15,7 +15,7 @@ export class ServerlessVideoTranscoderServiceStack extends cdk.Stack {
     // s3
     const uploadBucket = new s3.Bucket(this, "VideoUploads", {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
-      bucketName: "jhon-serverless-video-transcoder-store",
+      bucketName: "jhon-serverless-video-transcoder-store-us-east-1",
       autoDeleteObjects: true,
       cors: [
         {
