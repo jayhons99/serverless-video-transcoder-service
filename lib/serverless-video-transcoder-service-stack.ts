@@ -1,7 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as lambdaNodejs from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as apigw from 'aws-cdk-lib/aws-apigateway';
 import path from 'path';
@@ -31,13 +31,13 @@ export class ServerlessVideoTranscoderServiceStack extends cdk.Stack {
     });
 
     // lambda
-    const generateUploadUrlFunction = new lambda.Function(this, "GenerateUploadUrlLambda", {
+    const generateUploadUrlFunction = new lambdaNodejs.NodejsFunction(this, "GenerateUploadUrlLambda", {
       runtime: lambda.Runtime.NODEJS_20_X,
-      handler: "generateUploadUrl.handler",
-      code: lambda.Code.fromAsset(path.join(__dirname, 'common', 'lambda')),
+      entry: path.join(__dirname, 'common', 'lambda', 'generateUploadUrl.ts'),
+      handler: 'handler',
       environment: {
-        UPLOAD_BUCKET: uploadBucket.bucketName,
-        BUCKET_ARN: uploadBucket.bucketArn
+        UPLOAD_BUCKET_NAME: uploadBucket.bucketName,
+        AWS_REGION: this.region
       }
     });
 
