@@ -35,9 +35,11 @@ export class ServerlessVideoTranscoderServiceStack extends cdk.Stack {
       runtime: lambda.Runtime.NODEJS_20_X,
       entry: path.join(__dirname, 'common', 'lambda', 'generateUploadUrl.ts'),
       handler: 'handler',
+      bundling: {
+        forceDockerBundling: false
+      },
       environment: {
-        UPLOAD_BUCKET_NAME: uploadBucket.bucketName,
-        AWS_REGION: this.region
+        UPLOAD_BUCKET_NAME: uploadBucket.bucketName
       }
     });
 
